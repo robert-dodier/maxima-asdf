@@ -1,0 +1,2 @@
+foobar : 1234;
+bazquux (x) := 1- x;
