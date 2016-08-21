@@ -8,11 +8,12 @@
                                       "/" user-string
                                       "/" project-string
                                       "/tarball/" ref-string))
+     (ql-home (format nil "~a" ql:*quicklisp-home*))
      (tar.gz-bytes (drakma:http-request url-string :connection-timeout nil))
-     (tar-filename (concatenate 'string "/home/robert/quicklisp/dists/quicklisp/archives/" project-string "-" ref-string))
+     (tar-filename (concatenate 'string ql-home "dists/quicklisp/archives/" project-string "-" ref-string))
      (tar.gz-filename (concatenate 'string tar-filename ".gz")))
     (with-open-file (f tar.gz-filename :direction :output :if-exists :supersede :element-type '(unsigned-byte 8))
       (write-sequence tar.gz-bytes f))
     (ql-gunzipper:gunzip tar.gz-filename tar-filename)
-    (ql-minitar:unpack-tarball tar-filename :directory "/home/robert/quicklisp/local-projects/")
+    (ql-minitar:unpack-tarball tar-filename :directory (concatenate 'string ql-home "local-projects/"))
     (delete-file tar-filename)))
