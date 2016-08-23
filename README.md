@@ -2,7 +2,9 @@
 
 The point is that with this stuff, ASDF can load system
 definitions which contain Maxima files. Maxima is called to
-load or compile and load Maxima files.
+load or compile and load Maxima files. There is also code
+to download tar.gz files from Github and install them into
+Quicklisp, which makes them available to ASDF.
 
 ## What's here
 
@@ -10,9 +12,14 @@ load or compile and load Maxima files.
 
   Definition of the :maxima-file component for ASDF.
 
-- maxima\_asdf.lisp
+- maxima\-asdf.lisp
 
   Glue code for calling ASDF functions from Maxima.
+
+- maxima\-quicklisp.lisp
+
+  Glue code for downloading and installing packages 
+  from Github into quicklisp/local-projects/.
 
 - foo/
 
@@ -21,6 +28,22 @@ load or compile and load Maxima files.
 
 ## How to use it
 
-See foo/foo.asd and foo/src/ for an example.
-For that to work, you have to put foo and maxima-file
-where ASDF can find them.
+Here is an example using the clifford package by Dimiter Prodanov.
+I forked clifford on Github and added a clifford.asd file.
+
+Note that the clifford package contains a couple of sizeable documents,
+so it might take a few moments to download.
+
+- Copy maxima-file/ to quicklisp/local-projects/.
+
+- Launch Maxima. The rest of the steps are carried out in the Maxima session.
+
+- `load ("maxima-asdf.lisp");`
+
+- `load ("maxima-quicklisp.lisp");
+
+- `install\_github ("robert-dodier", "clifford", "master");`
+
+- `asdf\_load\_source ("clifford");`
+
+- `demo (clifford);`
