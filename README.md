@@ -40,10 +40,10 @@ so it might take a few moments to download.
 
 - `load ("maxima-asdf.lisp");`
 
-- `load ("maxima-quicklisp.lisp");
+- `load ("maxima-quicklisp.lisp")`;
 
-- `install\_github ("robert-dodier", "clifford", "master");`
+- `install_github ("robert-dodier", "clifford", "master");`
 
-- `asdf\_load\_source ("clifford");`
+- `asdf_load_source ("clifford");`
 
 - `demo (clifford);`
