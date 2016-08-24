@@ -37,14 +37,3 @@
 	     (delete-file tar-filename)
 	     (list '(mlist) tar.gz-filename package-toplevel-path))))
 	(merror (format nil "~a: ~a" http-status (seventh request-results))))))
-
-(defmacro append-to-path (path-variable path item)
-  `(setq ,path-variable (append ,path-variable (list (concatenate 'string ,path ,item)))))
-
-(defun append-to-maxima-paths (p)
-  (declare (special $file_search_demo $file_search_lisp $file_search_maxima $file_search_tests $file_search_usage))
-  (append-to-path $file_search_demo p "$$$.{dem,demo}")
-  (append-to-path $file_search_lisp p "$$$.lisp")
-  (append-to-path $file_search_maxima p "$$$.mac")
-  (append-to-path $file_search_tests p "$$$.mac")
-  (append-to-path $file_search_usage p "$$$.{usg,txt}"))
