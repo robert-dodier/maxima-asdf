@@ -6,11 +6,19 @@
 
 (in-package :maxima)
 
+(defmacro with-maxima-path-update (name &body body)
+  (let ((source-topdir (gensym)))
+    `(prog1
+         (progn
+           ,@body)
+       (let ((,source-topdir (format nil "~a" (ql:where-is-system ,name))))
+         (append-to-maxima-paths ,source-topdir)))))
+
 (defun $asdf_load (name)
-  (asdf:load-system name))
+  (with-maxima-path-update name (asdf:load-system name)))
 
 (defun $asdf_compile (name)
-  (asdf:compile-system name))
+  (with-maxima-path-update name (asdf:compile-system name)))
 
 (defmacro append-to-path (path-variable path item)
   `(let ((to-be-added (concatenate 'string ,path ,item)))
@@ -26,10 +34,7 @@
   (append-to-path $file_search_usage p "$$$.{usg,txt}"))
 
 (defun $asdf_load_source (name)
-  (prog1
-      (asdf:oos 'asdf:load-source-op name)
-    (let ((source-topdir (format nil "~a" (ql:where-is-system name))))
-      (append-to-maxima-paths source-topdir))))
+  (with-maxima-path-update name (asdf:oos 'asdf:load-source-op name)))
 
 
 
