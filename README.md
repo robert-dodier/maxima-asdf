@@ -21,11 +21,6 @@ Quicklisp, which makes them available to ASDF.
   Glue code for downloading and installing packages 
   from Github into quicklisp/local-projects/.
 
-- foo/
-
-  Example of ASDF-loadable system which makes use
-  of :maxima-file components.
-
 ## How to use it
 
 Here is an example using the clifford package by Dimiter Prodanov.
