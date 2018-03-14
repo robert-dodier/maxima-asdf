@@ -1,3 +1,0 @@
-mumble (u, v) := u^v - v^u;
-
-blurf : 2^64 - 1;
