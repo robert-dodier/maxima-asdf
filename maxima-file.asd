@@ -1,6 +1,5 @@
 (defsystem maxima-file
   :name "maxima-file"
-  :version "2015.09.21"
   :maintainer "Robert Dodier"
   :author "Robert Dodier"
   :licence "GPL"
