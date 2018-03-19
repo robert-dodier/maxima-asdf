@@ -22,7 +22,7 @@
     ((maxima-version (concatenate 'string "maxima-" (symbol-value (find-symbol "*AUTOCONF-VERSION*" (find-package "MAXIMA")))))
      (system-name (component-name (component-system c)))
      (component-name (component-name c)))
-    (list (make-pathname :directory (list :relative maxima-version system-name) :name component-name))))
+    (list (make-pathname :directory (list :relative maxima-version system-name) :name component-name :type "LISP"))))
 
 (defmethod perform ((o compile-op) (c maxima-file))
   (let*
