@@ -10,15 +10,6 @@
 (defclass info-index (cl-source-file)
   ((type :initform "lisp"))) ;; ISN'T THIS INHERITED FROM CL-SOURCE-FILE ??
 
-(defmethod input-files ((o compile-op) (c info-index))
-  (let*
-    ((foo (call-next-method))
-     ;; WHY DOESN'T THE FOLLOWING LINE WORK ??
-     ;; (bar (info-index-type c))
-     (bar "lisp")
-     (baz (merge-pathnames (make-pathname :type bar) (first foo))))
-    (list baz)))
-
 (defmethod perform ((o compile-op) (c info-index))
   (let*
     ((system-name (component-name (component-system c)))
