@@ -7,8 +7,12 @@
 
 (in-package :asdf)
 
-(defclass info-index (cl-source-file)
-  ((type :initform "lisp"))) ;; ISN'T THIS INHERITED FROM CL-SOURCE-FILE ??
+(defclass info-index (cl-source-file) ())
+
+;; An info index file is a Lisp source file, which is compiled
+;; just the same as an ordinary Lisp file, with the additional
+;; step of copying the .info to the same location to where the
+;; compiler output will go.
 
 (defmethod perform ((o compile-op) (c info-index))
   (let*
@@ -16,6 +20,8 @@
      (info-name (make-pathname :name system-name :type "info"))
      (info-in-file (merge-pathnames info-name (first (input-files o c))))
      (info-out-file (merge-pathnames info-name (first (output-files o c)))))
-    (unless (uiop:pathname-equal info-in-file info-out-file) ;; silently refuse to copy file to itself
+    ;; INFO-IN-FILE and INFO-OUT-FILE should be different,
+    ;; but just to be safe, silently refuse to copy file to itself.
+    (unless (uiop:pathname-equal info-in-file info-out-file)
       (uiop:copy-file info-in-file info-out-file))
     (call-next-method)))
