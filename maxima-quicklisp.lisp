@@ -2,9 +2,7 @@
 ;; copyright 2016 by Robert Dodier
 ;; I release this work under terms of the GNU GPL version 2
 
-;; I'd rather do (require 'drakma) here ... oh well.
-(if (not (gethash "drakma" asdf::*defined-systems*))
-  (ql:quickload :drakma))
+(require 'drakma)
 
 ;; install_github -- download a tarball from Github and unpack it into quicklisp/local-projects/.
 ;; Append the top-level project directory to various Maxima search paths.
