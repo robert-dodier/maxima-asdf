@@ -4,6 +4,8 @@
 
 (require 'drakma)
 
+(in-package :maxima)
+
 ;; install_github -- download a tarball from Github and unpack it into quicklisp/local-projects/.
 ;; Append the top-level project directory to various Maxima search paths.
 ;; Return a Maxima list comprising the path to the tar.gz and the unpacked top-level directory.
